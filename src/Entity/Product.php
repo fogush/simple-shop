@@ -6,11 +6,15 @@ namespace App\Entity;
 
 use App\Repository\ProductRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping\UniqueConstraint;
 use Gedmo\Timestampable\Traits\TimestampableEntity;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * @ORM\Entity(repositoryClass=ProductRepository::class)
+ * @ORM\Table(name="product", uniqueConstraints={@UniqueConstraint(name="unique_name", columns={"name"})})
  */
+#[UniqueEntity('name')]
 class Product
 {
     use TimestampableEntity;
@@ -25,6 +29,11 @@ class Product
     /**
      * @ORM\Column(type="string", length=255)
      */
+    private string $name;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
     private string $title;
 
     /**
@@ -32,15 +41,19 @@ class Product
      */
     private int $priceCents;
 
-    public function __construct(string $title, int $priceCents)
-    {
-        $this->title = $title;
-        $this->priceCents = $priceCents;
-    }
-
     public function getId(): ?int
     {
         return $this->id;
+    }
+
+    public function getName(): ?string
+    {
+        return $this->name;
+    }
+
+    public function setName(string $name): void
+    {
+        $this->name = $name;
     }
 
     public function getTitle(): string

@@ -16,12 +16,3 @@ doctrine:
                 dir: '%kernel.project_dir%/src/Entity'
                 prefix: 'App\Entity'
                 alias: App
-#    entity_managers:
-#        default:
-#            mappings:
-#                gedmo_timestampable:
-#                    type: annotation
-#                    prefix: Gedmo\Timestampable\Entity
-#                    dir: "%kernel.project_dir%/vendor/gedmo/doctrine-extensions/src/Timestampable/Entity"
-#                    alias: GedmoTranslatable # (optional) it will default to the name set for the mapping
-#                    is_bundle: false

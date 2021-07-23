@@ -8,14 +8,17 @@ use App\Repository\ProductRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\ORM\Mapping\UniqueConstraint;
 use Gedmo\Timestampable\Traits\TimestampableEntity;
+use JetBrains\PhpStorm\ArrayShape;
+use JetBrains\PhpStorm\Pure;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=ProductRepository::class)
  * @ORM\Table(name="product", uniqueConstraints={@UniqueConstraint(name="unique_name", columns={"name"})})
  */
 #[UniqueEntity('name')]
-class Product
+class Product implements \JsonSerializable
 {
     use TimestampableEntity;
 
@@ -28,16 +31,19 @@ class Product
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\Length(min=1, max=255)
      */
     private string $name;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\Length(min=1, max=255)
      */
     private string $title;
 
     /**
      * @ORM\Column(type="integer")
+     * @Assert\Range(min=0)
      */
     private int $priceCents;
 
@@ -71,8 +77,23 @@ class Product
         return $this->priceCents;
     }
 
+    public function getPriceDollars(): float
+    {
+        return $this->priceCents * 100;
+    }
+
     public function setPriceCents(int $priceCents): void
     {
         $this->priceCents = $priceCents;
+    }
+
+    public function jsonSerialize(): array
+    {
+        return [
+            'id' => $this->getId(),
+            'name' => $this->getName(),
+            'title' => $this->getTitle(),
+            'priceCents' => $this->getPriceCents(),
+        ];
     }
 }

@@ -7,7 +7,6 @@ namespace App\Form\Handler;
 use App\Entity\Product;
 use App\Form\ProductFormType;
 use App\Repository\ProductRepository;
-use Symfony\Component\Form\FormFactory;
 use Symfony\Component\Form\FormFactoryInterface;
 
 class ProductHandler
@@ -17,17 +16,17 @@ class ProductHandler
         private FormFactoryInterface $formFactory
     ) {}
 
-    public function handle(array $json, Product $product): bool
+    public function handle(array $json, Product $product): ?string
     {
         $form = $this->formFactory->create(ProductFormType::class, $product);
-        $form->submit($json);
+        $form->submit($json, false);
 
-        if ($form->isValid()) {
-            $this->productRepository->save($product);
-
-            return true;
+        if (!$form->isValid()) {
+            return (string) $form->getErrors(true);
         }
 
-        return false;
+        $this->productRepository->save($product);
+
+        return null;
     }
 }

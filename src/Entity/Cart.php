@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Entity;
 
 use App\Repository\CartRepository;
+use App\Validator\CartProductCount;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -22,16 +23,17 @@ class Cart
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
      */
-    private int $id;
+    private ?int $id;
 
     /**
-     * @ORM\ManyToMany(targetEntity=Product::class)
+     * @ORM\OneToMany(targetEntity=CartProduct::class, mappedBy="cart", orphanRemoval=true, cascade={"persist"})
      */
-    private ArrayCollection $products;
+    #[CartProductCount]
+    private Collection $cartProducts;
 
     public function __construct()
     {
-        $this->products = new ArrayCollection();
+        $this->cartProducts = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -40,22 +42,56 @@ class Cart
     }
 
     /**
-     * @return Collection|Product[]
+     * @return Collection|CartProduct[]
      */
-    public function getProducts(): Collection
+    public function getCartProducts(): Collection
     {
-        return $this->products;
+        return $this->cartProducts;
     }
 
-    public function addProduct(Product $product): void
+    public function addCartProduct(CartProduct $cartProduct): void
     {
-        if (!$this->products->contains($product)) {
-            $this->products[] = $product;
+        if (!$this->cartProducts->contains($cartProduct)) {
+            $this->cartProducts[] = $cartProduct;
+            $cartProduct->setCart($this);
         }
+    }
+
+    public function removeCartProduct(CartProduct $cartProduct): void
+    {
+        if ($this->cartProducts->removeElement($cartProduct)) {
+            // set the owning side to null (unless already changed)
+            if ($cartProduct->getCart() === $this) {
+                $cartProduct->setCart(null);
+            }
+        }
+    }
+
+    public function addProduct(Product $product, int $count): CartProduct
+    {
+        foreach ($this->cartProducts as $cartProduct) {
+            if ($cartProduct->getProduct()->getId() === $product->getId()) {
+                $cartProduct->setCount($count);
+
+                return $cartProduct;
+            }
+        }
+
+        $cartProduct = new CartProduct();
+        $cartProduct->setProduct($product);
+        $cartProduct->setCount($count);
+
+        $this->addCartProduct($cartProduct);
+
+        return $cartProduct;
     }
 
     public function removeProduct(Product $product): void
     {
-        $this->products->removeElement($product);
+        foreach ($this->cartProducts as $cartProduct) {
+            if ($cartProduct->getProduct()->getId() === $product->getId()) {
+                $this->removeCartProduct($cartProduct);
+            }
+        }
     }
 }

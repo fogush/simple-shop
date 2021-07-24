@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Repository;
 
 use App\Entity\Cart;
+use App\Entity\Product;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -21,32 +22,20 @@ class CartRepository extends ServiceEntityRepository
         parent::__construct($registry, Cart::class);
     }
 
-    // /**
-    //  * @return Cart[] Returns an array of Cart objects
-    //  */
-    /*
-    public function findByExampleField($value)
+    public function save(Cart $cart): void
     {
-        return $this->createQueryBuilder('c')
-            ->andWhere('c.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('c.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
-        ;
+        $this->getEntityManager()->persist($cart);
+        $this->getEntityManager()->flush();
     }
-    */
 
-    /*
-    public function findOneBySomeField($value): ?Cart
+    public function delete(Cart $cart): void
     {
-        return $this->createQueryBuilder('c')
-            ->andWhere('c.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
+        $this->getEntityManager()->remove($cart);
+        $this->getEntityManager()->flush();
     }
-    */
+
+    public function findProduct($id): Product|null
+    {
+        return $this->getEntityManager()->getRepository(Product::class)->find($id);
+    }
 }

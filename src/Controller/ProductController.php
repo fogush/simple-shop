@@ -6,12 +6,12 @@ namespace App\Controller;
 
 use App\Entity\Product;
 use App\Form\Handler\ProductHandler;
+use App\Helper\JsonHelper;
 use App\Repository\ProductRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 #[Route('/products', name: 'app.product.')]
 class ProductController extends AbstractController
@@ -23,46 +23,49 @@ class ProductController extends AbstractController
 
         $paginator = $productRepository->getPaginator($offset);
 
+        //TODO: it could be better to do not show the links when a page is not available
         return $this->json([
             'products' => $paginator->getIterator()->getArrayCopy(),
-            'previousPage' => $this->getLinkToPage($offset - ProductRepository::PRODUCTS_PER_PAGE),
+            'previousPage' => $this->getLinkToPage(max(0, $offset - ProductRepository::PRODUCTS_PER_PAGE)),
             'nextPage' => $this->getLinkToPage(min(count($paginator), $offset + ProductRepository::PRODUCTS_PER_PAGE)),
         ]);
     }
 
     private function getLinkToPage(int $offset): string
     {
-        return $this->generateUrl('app.product.list', ['offset' => $offset], UrlGeneratorInterface::ABSOLUTE_PATH);
+        return $this->generateUrl('app.product.list', ['offset' => $offset]);
     }
 
     #[Route('', name: 'create', methods: ['POST'])]
     public function create(ProductHandler $handler, Request $request): Response
     {
-        if (($json = $this->getJson($request)) === null) {
-            return $this->json(['error' => 'Invalid JSON'], 400);
+        if (($json = JsonHelper::decode($request->getContent())) === null) {
+            return $this->json(['error' => 'Invalid JSON'], Response::HTTP_BAD_REQUEST);
         }
 
         $product = new Product();
 
-        if (!$handler->handle($json, $product)) {
-            return $this->json(['error' => 'Provided product is not valid'], 400);
+        $errors = $handler->handle($json, $product);
+        if ($errors !== null) {
+            return $this->json(['error' => 'Provided product is not valid: ' . $errors], Response::HTTP_BAD_REQUEST);
         }
 
-        return $this->json(['id' => $product->getId()], 201);
+        return $this->json(['id' => $product->getId()], Response::HTTP_CREATED);
     }
 
-    #[Route('/{id}', name: 'update', requirements: ['id' => '\d+'], methods: ['PUT'])]
+    #[Route('/{id}', name: 'update', requirements: ['id' => '\d+'], methods: ['PATCH'])]
     public function update(Product $product, ProductHandler $handler, Request $request): Response
     {
-        if (($json = $this->getJson($request)) === null) {
-            return $this->json(['error' => 'Invalid JSON'], 400);
+        if (($json = JsonHelper::decode($request->getContent())) === null) {
+            return $this->json(['error' => 'Invalid JSON'], Response::HTTP_BAD_REQUEST);
         }
 
-        if (!$handler->handle($json, $product)) {
-            return $this->json(['error' => 'Provided product is not valid'], 400);
+        $errors = $handler->handle($json, $product);
+        if ($errors !== null) {
+            return $this->json(['error' => 'Provided product is not valid: ' . $errors], Response::HTTP_BAD_REQUEST);
         }
 
-        return $this->json(['id' => $product->getId()], 200);
+        return $this->json(['id' => $product->getId()], Response::HTTP_OK);
     }
 
     #[Route('/{id}', name: 'delete', requirements: ['id' => '\d+'], methods: ['DELETE'])]
@@ -70,15 +73,6 @@ class ProductController extends AbstractController
     {
         $repository->delete($product);
 
-        return $this->json([], 200);
-    }
-
-    private function getJson(Request $request): ?array
-    {
-        try {
-            return json_decode($request->getContent(), true, 512, JSON_THROW_ON_ERROR);
-        } catch (\JsonException) {
-            return null;
-        }
+        return new Response(status: Response::HTTP_OK);
     }
 }

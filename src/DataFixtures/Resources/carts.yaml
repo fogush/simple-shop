@@ -1,0 +1,21 @@
+carts:
+  - products:
+      - name: fallout
+        count: 1
+      - name: baldurs_gate
+        count: 3
+  - products:
+      - name: bloodborne
+        count: 1
+  - products:
+      - name: baldurs_gate
+        count: 9
+      - name: fallout
+        count: 10
+  - products:
+      - name: baldurs_gate
+        count: 1
+      - name: fallout
+        count: 2
+      - name: icewind_dale
+        count: 3

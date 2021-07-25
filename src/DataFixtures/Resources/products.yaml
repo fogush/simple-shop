@@ -1,0 +1,16 @@
+products:
+  - name: fallout
+    title: Fallout
+    priceCents: 199
+  - name: dont_starve
+    title: Don't Starve
+    priceCents: 299
+  - name: baldurs_gate
+    title: Baldur's Gate
+    priceCents: 399
+  - name: icewind_dale
+    title: Icewind Dale
+    priceCents: 499
+  - name: bloodborne
+    title: Bloodborne
+    priceCents: 599

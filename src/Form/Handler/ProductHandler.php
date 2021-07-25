@@ -14,7 +14,8 @@ class ProductHandler
     public function __construct(
         private ProductRepository $productRepository,
         private FormFactoryInterface $formFactory
-    ) {}
+    ) {
+    }
 
     public function handle(array $json, Product $product): ?string
     {

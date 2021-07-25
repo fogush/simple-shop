@@ -46,7 +46,7 @@ class ProductController extends AbstractController
         $product = new Product();
 
         $errors = $handler->handle($json, $product);
-        if ($errors !== null) {
+        if (null !== $errors) {
             return $this->json(['error' => 'Provided product is not valid: ' . $errors], Response::HTTP_BAD_REQUEST);
         }
 
@@ -61,7 +61,7 @@ class ProductController extends AbstractController
         }
 
         $errors = $handler->handle($json, $product);
-        if ($errors !== null) {
+        if (null !== $errors) {
             return $this->json(['error' => 'Provided product is not valid: ' . $errors], Response::HTTP_BAD_REQUEST);
         }
 

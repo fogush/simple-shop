@@ -15,12 +15,13 @@ class CartHandler
     public function __construct(
         private CartRepository $cartRepository,
         private ValidatorInterface $validator
-    ) {}
+    ) {
+    }
 
     public function handle(Cart $cart, Product $product, Request $request): ?string
     {
         $count = $request->query->getInt('count', 1);
-        if ($count === 0) {
+        if (0 === $count) {
             $cart->removeProduct($product);
         } else {
             $cart->addProduct($product, $count);

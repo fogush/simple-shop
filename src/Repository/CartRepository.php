@@ -34,7 +34,7 @@ class CartRepository extends ServiceEntityRepository
         $this->getEntityManager()->flush();
     }
 
-    public function findProduct($id): Product|null
+    public function findProduct($id): Product | null
     {
         return $this->getEntityManager()->getRepository(Product::class)->find($id);
     }

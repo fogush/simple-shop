@@ -42,7 +42,7 @@ class Product implements \JsonSerializable
     private string $title;
 
     /**
-     * Cents are because it's safer to make calculations in int rather in float
+     * Cents are because it's safer to make calculations in int rather in float.
      *
      * @ORM\Column(type="integer")
      * @Assert\Range(min=0)

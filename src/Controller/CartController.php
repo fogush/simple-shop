@@ -32,7 +32,7 @@ class CartController extends AbstractController
 
         return $this->json([
             'products' => $products,
-            'totalSumDollars' => $totalSum / 100
+            'totalSumDollars' => $totalSum / 100,
         ], Response::HTTP_OK);
     }
 
@@ -50,7 +50,7 @@ class CartController extends AbstractController
     public function addProduct(Cart $cart, Product $product, CartHandler $cartHandler, Request $request): Response
     {
         $errors = $cartHandler->handle($cart, $product, $request);
-        if ($errors !== null) {
+        if (null !== $errors) {
             return $this->json(['errors' => $errors], Response::HTTP_BAD_REQUEST);
         }
 

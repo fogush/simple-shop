@@ -37,7 +37,69 @@
 							]
 						}
 					},
-					"response": []
+					"response": [
+						{
+							"name": "Create",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://127.0.0.1:8000/carts",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"carts"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 26 Jul 2021 19:21:42 GMT"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.0.8"
+								},
+								{
+									"key": "X-Robots-Tag",
+									"value": "noindex"
+								},
+								{
+									"key": "Content-Length",
+									"value": "9"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": 5\n}"
+						}
+					]
 				},
 				{
 					"name": "Add product",
@@ -54,7 +116,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://127.0.0.1:8000/carts/1/products/2?count=8",
+							"raw": "http://127.0.0.1:8000/carts/5/products/1?count=2",
 							"protocol": "http",
 							"host": [
 								"127",
@@ -65,19 +127,90 @@
 							"port": "8000",
 							"path": [
 								"carts",
-								"1",
+								"5",
 								"products",
-								"2"
+								"1"
 							],
 							"query": [
 								{
 									"key": "count",
-									"value": "8"
+									"value": "2"
 								}
 							]
 						}
 					},
-					"response": []
+					"response": [
+						{
+							"name": "Add product",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://127.0.0.1:8000/carts/5/products/1?count=2",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"carts",
+										"5",
+										"products",
+										"1"
+									],
+									"query": [
+										{
+											"key": "count",
+											"value": "2"
+										}
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 26 Jul 2021 19:22:20 GMT"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.0.8"
+								},
+								{
+									"key": "X-Robots-Tag",
+									"value": "noindex"
+								},
+								{
+									"key": "Content-Length",
+									"value": "9"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": 5\n}"
+						}
+					]
 				},
 				{
 					"name": "Remove product",
@@ -85,7 +218,7 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "http://127.0.0.1:8000/carts/1/products/2",
+							"raw": "http://127.0.0.1:8000/carts/5/products/1",
 							"protocol": "http",
 							"host": [
 								"127",
@@ -96,13 +229,69 @@
 							"port": "8000",
 							"path": [
 								"carts",
-								"1",
+								"5",
 								"products",
-								"2"
+								"1"
 							]
 						}
 					},
-					"response": []
+					"response": [
+						{
+							"name": "Remove product",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "http://127.0.0.1:8000/carts/36/products/54",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"carts",
+										"36",
+										"products",
+										"54"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "html",
+							"header": [
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Content-Type",
+									"value": "text/html; charset=UTF-8"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 26 Jul 2021 19:23:08 GMT"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.0.8"
+								},
+								{
+									"key": "X-Robots-Tag",
+									"value": "noindex"
+								},
+								{
+									"key": "Content-Length",
+									"value": "0"
+								}
+							],
+							"cookie": [],
+							"body": null
+						}
+					]
 				},
 				{
 					"name": "Cart info",
@@ -110,7 +299,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://127.0.0.1:8000/carts/1",
+							"raw": "http://127.0.0.1:8000/carts/5",
 							"protocol": "http",
 							"host": [
 								"127",
@@ -121,11 +310,65 @@
 							"port": "8000",
 							"path": [
 								"carts",
-								"1"
+								"5"
 							]
 						}
 					},
-					"response": []
+					"response": [
+						{
+							"name": "Cart info",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://127.0.0.1:8000/carts/5",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"carts",
+										"5"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 26 Jul 2021 19:24:04 GMT"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.0.8"
+								},
+								{
+									"key": "X-Robots-Tag",
+									"value": "noindex"
+								},
+								{
+									"key": "Content-Length",
+									"value": "118"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"products\": [\n        {\n            \"id\": 1,\n            \"name\": \"bloodborne\",\n            \"title\": \"Bloodborne\",\n            \"priceDollars\": 5.99,\n            \"count\": 2\n        }\n    ],\n    \"totalSumDollars\": 5.99\n}"
+						}
+					]
 				}
 			]
 		},
@@ -164,7 +407,69 @@
 							]
 						}
 					},
-					"response": []
+					"response": [
+						{
+							"name": "List",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://127.0.0.1:8000/products",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"products"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 26 Jul 2021 19:19:27 GMT"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.0.8"
+								},
+								{
+									"key": "X-Robots-Tag",
+									"value": "noindex"
+								},
+								{
+									"key": "Content-Length",
+									"value": "315"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"products\": [\n        {\n            \"id\": 52,\n            \"name\": \"baldurs_gate\",\n            \"title\": \"Baldur's Gate\",\n            \"priceDollars\": 3.99\n        },\n        {\n            \"id\": 54,\n            \"name\": \"bloodborne\",\n            \"title\": \"Bloodborne\",\n            \"priceDollars\": 5.99\n        },\n        {\n            \"id\": 51,\n            \"name\": \"dont_starve\",\n            \"title\": \"Don't Starve\",\n            \"priceDollars\": 2.99\n        }\n    ],\n    \"previousPage\": \"/products?offset=0\",\n    \"nextPage\": \"/products?offset=3\"\n}"
+						}
+					]
 				},
 				{
 					"name": "Create",
@@ -195,7 +500,69 @@
 							]
 						}
 					},
-					"response": []
+					"response": [
+						{
+							"name": "Create",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\"name\": \"test\", \"title\": \"Test\", \"priceCents\": 300}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://127.0.0.1:8000/products",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"products"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 26 Jul 2021 19:18:58 GMT"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.0.8"
+								},
+								{
+									"key": "X-Robots-Tag",
+									"value": "noindex"
+								},
+								{
+									"key": "Content-Length",
+									"value": "9"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": 55\n}"
+						}
+					]
 				},
 				{
 					"name": "Delete",
@@ -212,7 +579,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://127.0.0.1:8000/products/1",
+							"raw": "http://127.0.0.1:8000/products/6",
 							"protocol": "http",
 							"host": [
 								"127",
@@ -223,11 +590,74 @@
 							"port": "8000",
 							"path": [
 								"products",
-								"1"
+								"6"
 							]
 						}
 					},
-					"response": []
+					"response": [
+						{
+							"name": "Delete",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://127.0.0.1:8000/products/6",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"products",
+										"6"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "html",
+							"header": [
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Content-Type",
+									"value": "text/html; charset=UTF-8"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 26 Jul 2021 19:20:31 GMT"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.0.8"
+								},
+								{
+									"key": "X-Robots-Tag",
+									"value": "noindex"
+								},
+								{
+									"key": "Content-Length",
+									"value": "0"
+								}
+							],
+							"cookie": [],
+							"body": null
+						}
+					]
 				},
 				{
 					"name": "Update",
@@ -244,7 +674,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://127.0.0.1:8000/products/1",
+							"raw": "http://127.0.0.1:8000/products/6",
 							"protocol": "http",
 							"host": [
 								"127",
@@ -255,11 +685,74 @@
 							"port": "8000",
 							"path": [
 								"products",
-								"1"
+								"6"
 							]
 						}
 					},
-					"response": []
+					"response": [
+						{
+							"name": "Update",
+							"originalRequest": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\"title\": \"New title\"}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://127.0.0.1:8000/products/6",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"products",
+										"6"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 26 Jul 2021 19:20:13 GMT"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.0.8"
+								},
+								{
+									"key": "X-Robots-Tag",
+									"value": "noindex"
+								},
+								{
+									"key": "Content-Length",
+									"value": "9"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": 6\n}"
+						}
+					]
 				}
 			]
 		}

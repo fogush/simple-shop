@@ -32,12 +32,14 @@ class Product implements \JsonSerializable
     /**
      * @ORM\Column(type="string", length=255)
      * @Assert\Length(min=1, max=255)
+     * @Assert\NotBlank(message="Name should not be blank")
      */
     private string $name;
 
     /**
      * @ORM\Column(type="string", length=255)
      * @Assert\Length(min=1, max=255)
+     * @Assert\NotBlank(message="Title should not be blank")
      */
     private string $title;
 
@@ -45,7 +47,8 @@ class Product implements \JsonSerializable
      * Cents are because it's safer to make calculations in int rather in float.
      *
      * @ORM\Column(type="integer")
-     * @Assert\Range(min=0)
+     * @Assert\PositiveOrZero
+     * @Assert\NotBlank(message="Price should not be blank")
      */
     private int $priceCents;
 

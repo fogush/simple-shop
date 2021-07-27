@@ -22,7 +22,14 @@ It's based on Symfony and therefore requires symfony tools.
    symfony server:start
    ```
 
-You may use Postman collection of requests (`./Simple Shop API.postman_collection.json`) to see how to operate the API
+## Usage
+You may use Postman collection of requests (`./Simple Shop API.postman_collection.json`) to see how to operate the API.
+
+Run PHP CS Fixer to validate the code
+```bash
+symfony composer cs:dry #to only show issues
+symfony composer cs:fix #to change files
+```
 
 ## Testing
 1. Fill new database credentials and a database name in `.env.test.local` (override `DATABASE_URL`)
@@ -42,4 +49,5 @@ You may use Postman collection of requests (`./Simple Shop API.postman_collectio
 - Add more tests
 - Hide the Product API under some authentication system
 - Add Swagger
+- Add more static analyzers
 - Something else

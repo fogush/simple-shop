@@ -36,8 +36,6 @@ class ProductControllerTest extends WebTestCase
 
     public function provideInvalidProducts(): array
     {
-        echo 'asd' . 'asdsd';
-
         return [
             'invalid JSON' => [
                 'something',

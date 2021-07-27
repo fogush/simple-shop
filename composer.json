@@ -1,5 +1,5 @@
 {
-    "name": "fogush/simple_shop",
+    "name": "fogush/simple-shop",
     "type": "project",
     "minimum-stability": "stable",
     "description": "A simple shop allowing adding products to the cart",
